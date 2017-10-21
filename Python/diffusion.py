@@ -1,4 +1,6 @@
-!#/usr/bin/python
+#!#/usr/bin/python
+
+# checked for consistency on 10/21/17
 
 maxSize = 10
 
@@ -6,7 +8,7 @@ maxSize = 10
 cube = [[[0.0 for k in range(maxSize)] for j in range(maxSize)] for i in range(maxSize)]
 
 diffusionCoef = 0.175
-roomDim = 5
+roomDim = 5.
 gasSpeed = 250.0
 tStep = (roomDim / gasSpeed) / maxSize
 blockDist = roomDim / maxSize
@@ -15,7 +17,7 @@ dTerm = diffusionCoef * tStep / (blockDist * blockDist)
 
 cube[0][0][0] = 1.0e21
 
-pass = 0
+#pass = 0
 time = 0.0
 ratio = 0.0
 
