@@ -1,0 +1,88 @@
+Times Based on Printing During Diffusion
+
+Lisp
+Simulated:		Wall:		Dimension:	Partition:
+51.54			54.831		10		No
+51.28			935.699		20		No
+137.14			138.037		10		Yes
+113.12			1988.545	20		Yes
+
+C
+Simulated:		Wall:		Dimension:	Partition:
+51.44			5.72		10		No
+51.185			93.12		20		No
+136.322			14.32		10		Yes
+112.513			189.51		20		Yes
+
+C#
+Simulated:		Wall:		Dimension:	Partition:
+51.44			21.6128589	10		No
+51.18499		336.302891	20		No
+136.32199		53.1090012	10		Yes
+112.513			714.9178399	20		Yes
+
+Fortran
+Simulated:		Wall:		Dimension:	Partition:
+52.632			6.54044390	10		No
+51.37499		98.6151352	20		No
+138.10199		16.4623013	10		Yes
+112.823			212.044525	20		Yes
+
+Python
+Simulated:		Wall:		Dimension:	Partition:
+51.44			326.632786989	10		No
+51.185			6194.77643919	20		No
+136.322			895.878314018	10		Yes
+112.513			12817.2296751	20		Yes
+
+Go
+Simulated:		Wall:		Dimension:	Partition:
+51.44			2.7694		10		No
+51.185			33.3393		20		No
+136.322			6.6320		10		Yes
+112.513			70.6916		20		Yes
+
+
+
+
+
+
+
+
+
+python	simulated		wall
+10 	51.44			326.632786989
+15	51.268			1833.82702708
+20	51.185			6194.77643919
+25	51.1272			14328.0850909
+
+go	simulated		wall
+10	51.440			2.6261
+15	51.268			11.0697
+20	51.185			33.5599
+25	51.127200		80.5538
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
