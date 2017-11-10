@@ -17,7 +17,7 @@ def main():
 	
 	# Set Partition if the Partition Exists
 	flag = -5.0e0 # to the Arbitrary Flag Value
-	if (withPartition == 1)
+	if (withPartition == 1):
 		for i in range (0, maxSize):
 			for j in range (0, maxSize):
 				for k in range (0, maxSize):
