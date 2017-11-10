@@ -19,8 +19,9 @@ COMPILE INSTRUCTIONS
 C:          gcc diffusion.c
             ./a.out
 C#:         mcs diffusion.cs
-            diffusion.exe
-Fortran90:  gfortran diffusion.for
+            mono diffusion.exe
+Fortran90:  gfortran cube_mem.f90
+	    gfortran diffusion.f90 cube_mem.f90
             ./a.out
 Go:         go run diffusion.go
             
