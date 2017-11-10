@@ -1,0 +1,3 @@
+COMPILE
+mcs diffusion.cs
+mono diffusion.exe
