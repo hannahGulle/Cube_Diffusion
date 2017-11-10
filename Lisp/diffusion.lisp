@@ -26,7 +26,7 @@
 
 ; Arbitrary Value of Partition Cube Divisions
 (defvar flag)
-(setf flag -5.0)
+(setf flag -5.0d0)
 
 ; Request the Number of Cube Divisions in the 3D Cube Model
 (format t "How big is the cube?~%")
@@ -40,12 +40,14 @@
 ; Initialize the 3D Cube Model to the User Inputted Cube Division #
 (setf cube (make-array (list maxSize maxSize maxSize)))
 
-(setf change 0.0)		;; Initialize to No Change
-(setf sim-time 0.0)		;; Initialize to No Simulated Time
-(setf part-ratio 0.0)		;; Initialize to No Particle Ratio
-(setf diffusionCoef 0.175)	;; Initialize to Constant
-(setf roomDim 5.0)		;; Initialzie to 5.0 Meters
-(setf gasSpeed 250.0)		;; Initialzie to 250.0 Meters/Second
+
+(setf change 0.0d0)		;; Initialize to No Change
+(setf sim-time 0.0d0)		;; Initialize to No Simulated Time
+(setf part-ratio 0.0d0)		;; Initialize to No Particle Ratio
+(setf diffusionCoef 0.175d0)	;; Initialize to Constant
+(setf roomDim 5.0d0)		;; Initialzie to 5.0 Meters
+(setf gasSpeed 250.0d0)		;; Initialzie to 250.0 Meters/Second
+
 
 ; tStep = (roomDim / gasSpeed) / maxSize
 (setf tStep (/ (/ roomDim gasSpeed) maxSize))
@@ -56,18 +58,19 @@
 ; dTerm = (tStep * diffusionCoef) / (blockDist^2)
 (setf dTerm (/ (* tStep diffusionCoef) (* blockDist blockDist)))
 
-; Set Parition Cubes to Flag; Otherwise Set to Zero
+; Set Parition Cubes to Flag if the Partition Exists; Otherwise Set to Zero
 (dotimes (i maxSize)
   (dotimes (j maxSize)
     (dotimes (k maxSize)
-	  (if (and (= i midpoint) (> j (- midpoint 1)) (= withPartition 1)) 
+	(if (and (= i midpoint) (> (- midpoint 1)) (= withPartition 1))
 	    (setf (aref cube i j k) flag)
-	    (setf (aref cube i j k) 0.0)
-	  )
+	    (setf (aref cube i j k) 0.0d0)
+	)
       )))
 
+
 ; Set Initial Value of the Top Left Corner
-(setf (aref cube 0 0 0) 1.0e21)
+(setf (aref cube 0 0 0) 1.0D21)
 	; Begin Diffusion Process
 (defun diffusion (maxSize cube flag)
 	(loop
@@ -134,7 +137,7 @@
 	; Increase Simulation Time for Each "Round" of Diffusion
 	  (setf sim-time (+ sim-time tStep))
 
-	  (setf sum 0.0)
+	  (setf sum 0.0d0)
 	  (setf maxVal (aref cube 0 0 0))
 	  (setf minVal (aref cube 0 0 0))
 
@@ -152,7 +155,7 @@
 		    ))	
 		)))
 
-	  (format t "~$ ~%" sim-time)
+	  (format t "~$ ~$ ~$ ~$ ~$ ~%" sim-time part-ratio (aref cube 0 0 0) (aref cube (- maxSize 1) (- maxSize 1) (- maxSize 1)) sum)
 	  (setf part-ratio (/ minVal maxVal))
 	  (when (> part-ratio 0.99) (return part-ratio))); End of Diffuse Loop
 (format t "Box equilibrated in ~$ seconds of simulated time.~%" sim-time)
