@@ -1,0 +1,53 @@
+Hannah Gulle
+Program 2 CSC 330 "Simplified 3D Diffusion Model"
+
+SUMMARY
+For a given rank 3 array, CUBE, and a single side dimension split into, MAXSIZE,
+cube divisions, the total simulated time of diffusion of 1e21 particles from
+the top left corner of the CUBE is calculated along with the total wall time
+for the diffusion process.
+
+LANGUAGES
+C
+C#
+Fortran90
+Go
+Lisp
+Python
+
+COMPILE INSTRUCTIONS
+C:          gcc diffusion.c
+            ./a.out
+C#:         mcs diffusion.cs
+            diffusion.exe
+Fortran90:  gfortran diffusion.for
+            ./a.out
+Go:         go run diffusion.go
+            
+Lisp:       chmod u+x diffusion.lisp
+            diffusion.lisp
+Python:     chmod u+x diffusion.py
+            diffusion.py
+
+ALGORITHM
+1.) The rank 3 array, CUBE, is instantiated and memory allocated. The array is
+filled with 0.0, unless a partition is in use, then partition cubes are set to
+the arbitrary flag value.
+2.) For each cube division on axis x, y, and z, the cubes are evaluated under
+the following conditions:
+        a.) If the current cube and the adjacent cube are not partition cubes.
+        b.) Then, diffuse across the adjacent cubes.
+3.) For this simulation, it is assumed that the diffusion across cubes is in
+an outward direction with a constant diffusion term.
+4.) Once 99% of the cube has been diffused, the process ends and the simulated
+time is presented to the user.
+
+INPUT
+The program will request the number of cube divisions and the existence of the
+partition from the keyboard unless otherwise stated.
+
+OUTPUT
+The program will output the current simulated time, ratio, concentration of 
+particles in the top left corner, and concentration of particles in the bottom 
+right corner for each pass of diffusion. Once the diffusion process has ended,
+the total simulated time and wall time will be output to the screen.
