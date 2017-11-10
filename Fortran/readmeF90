@@ -1,0 +1,4 @@
+COMPILE
+gfortran cube_mem.f90
+gfortran diffusion.f90 cube_mem.f90
+./a.out
