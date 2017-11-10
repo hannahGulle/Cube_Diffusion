@@ -11,19 +11,17 @@ import (
 func main(){
 
 	// TO CHANGE NUMBER OF CUBE DIVISIONS
-	const maxSize int = 25
+	var maxSize int = 10
 
 	// Determines the existence of the partition
 	// Defaults to false (NO Partition)
 	var withPartition bool = false
 
-	fmt.Println("Current number of Cube Divisions: ", maxSize)
-	fmt.Println("To change the Number of Cube Divisions,")
-	fmt.Println("change the constant variable 'maxSize' at the top of the source code.")
-	fmt.Println("Then, run again.")
+	fmt.Println("How Many Cube Divisions? ")
+	fmt.Scanln(&maxSize)
 
 	// Request the Partition Existence from the Keyboard
-	fmt.Print("With Partition? Input 1 or 0 where Yes(1) and No(0).")
+	fmt.Println("With Partition? Input 1 or 0 where Yes(1) and No(0).")
 	intPart := -1
 	fmt.Scanln(&intPart)
 	fmt.Println(&intPart)
@@ -35,7 +33,6 @@ func main(){
 
 	var mid int = (maxSize/2)-1					// Mid cube of one side dimension
 	var flag float64 = -5.0e0					// Arbitrary Value of a partition cube
-	var cube [maxSize][maxSize][maxSize]float64			// 3D Cube Array
 	var diffusionCoef float64 = 0.175				
 	var roomDim float64 = 5.0					// Single Side Dimension of the Cube in Meters
 	var gasSpeed float64 = 250.0					// Speed of the gas particles in Meters/Second
@@ -45,11 +42,21 @@ func main(){
 	var dTerm float64 = diffusionCoef * tStep / (blockDist * blockDist)	// Diffusion (Differential) term between Adjacent cubes
 	var time float64 = 0.0							// Total simulated time in Seconds
 	var ratio float64 = 0.0							// Ratio of maximum concentration to minimum concentration cubes
+
+	
+	cube := make([][][]float64, maxSize)
+	for i := range cube{
+		cube[i] = make([][]float64, maxSize)
+		for j := range cube{
+			cube[i][j] = make([]float64, maxSize)
+		}
+	}
+
 	
 	// Zero the Array and Set the Partition Flags
-	for i := 0; i < maxSize; i++ {
-		for j := 0; j < maxSize; j++ {
-			for k := 0; k < maxSize; k++ {
+	for i := range cube{
+		for j := range cube[i] {
+			for k := range cube[i][j]{
 				if ( (i == mid) && (j > (mid-1)) && withPartition){
 					cube[i][j][k] = flag
 				} else{
@@ -66,9 +73,9 @@ func main(){
 
 		// Diffusion Process Begins
 		for ratio < 0.99 {
-			for i := 0; i < maxSize; i++ {
-				for j := 0; j < maxSize; j++ {
-					for k := 0; k < maxSize; k++ {
+			for i := range cube {
+				for j := range cube[i] {
+					for k := range cube[i][j] {
 						// No Diffusion through partition cubes
 						if cube[i][j][k] != flag {
 							// Diffuse to adjacent cube one ahead of the k dimension value
@@ -120,9 +127,9 @@ func main(){
 
 			// CHECK CONSERVATION OF MASS
 			// And find the minimum and maximum concentration values (not including partition cubes)
-			for r := 0; r < maxSize; r++ {
-				for s := 0; s < maxSize; s++ {
-					for t := 0; t < maxSize; t++ {
+			for r := range cube {
+				for s := range cube[r] {
+					for t := range cube[r][s] {
 						if cube[r][s][t] != flag {
 							if cube[r][s][t] > max {
 								max = cube[r][s][t]
